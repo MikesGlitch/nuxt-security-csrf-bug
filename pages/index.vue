@@ -1,10 +1,13 @@
 <template>
   <div>
-    <Nav />
-
-    <button @click.prevent="submitApplicationForm">
-      Submit
+    <button @click.prevent="submitApplicationForm(false)">
+      Failing Submit
     </button>
+    <button @click.prevent="submitApplicationForm(true)">
+      Successful Submit
+    </button>
+    <p>The csrf: {{ csrf }}</p>
+    <p>Status: {{ status }}</p>
   </div>
 </template>
 
@@ -12,8 +15,10 @@
 import { ref } from "vue";
 
 const buttonLoading = ref(false);
+const status = ref();
+const { csrf } = useCsrf();
 
-const submitApplicationForm = async () => {
+const submitApplicationForm = async (withHeader: boolean) => {
   buttonLoading.value = true;
 
   const applicationData = {
@@ -23,19 +28,25 @@ const submitApplicationForm = async () => {
     jobId: '1234',
     jobTitle: 'Software Engineer',
   };
+  
 
   try {
-    const response = await useFetch('/api/application', {
+    const { data, error } = await useFetch('/api/application', {
       method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify(applicationData),
-    });
+      headers: withHeader ? {
+        'csrf-token': csrf
+      } : undefined
+    })
 
-    console.log('Success', 'Application Submitted', 'Your application has been submitted successfully. We will be in touch!', 5000);
+    if (error.value) {
+      status.value = 'Failed - ' + error.value?.message;
+      return;
+    }
+
+    status.value = 'Success';
   } catch (error) {
-    console.log('Failure', 'Submission Error', 'There was a problem submitting your application. Please try again later.', 5000);
+    status.value = 'Failed';
   } finally {
     buttonLoading.value = false;
   }
