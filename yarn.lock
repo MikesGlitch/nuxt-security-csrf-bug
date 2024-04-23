@@ -4392,7 +4392,7 @@ nuxi@^3.11.1:
   optionalDependencies:
     fsevents "~2.3.3"
 
-nuxt-csurf@^1.5.1:
+nuxt-csurf@^1.5.1, nuxt-csurf@^1.5.2:
   version "1.5.2"
   resolved "https://registry.npmjs.org/nuxt-csurf/-/nuxt-csurf-1.5.2.tgz"
   integrity sha512-lLNx6kkHcwQFSStCe1gorATliOveQpMEuNzowT0expmsBNnT3y6ADITtoNNquLiFumdVtmVbiK7o+SDnfWfCgg==

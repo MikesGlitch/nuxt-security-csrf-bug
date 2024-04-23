@@ -32,7 +32,7 @@ const submitApplicationForm = async (withHeader: boolean) => {
 
   try {
     const { data, error } = await useFetch('/api/application', {
-      method: 'post',
+      method: 'POST',
       body: JSON.stringify(applicationData),
       headers: withHeader ? {
         'csrf-token': csrf

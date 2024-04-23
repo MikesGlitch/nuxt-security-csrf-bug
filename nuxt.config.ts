@@ -1,25 +1,19 @@
-import { type NuxtConfig } from '@nuxt/types';
+import { type NuxtConfig } from "@nuxt/types";
 
 const config: NuxtConfig = {
   devtools: { enabled: true },
 
-  modules: [
-    "nuxt-security",
-  ],
+  modules: ["nuxt-csurf"],
 
-  security: {
-    nonce: true,
-    csrf: {
-      enabled: true,
-      https: false,
-      addCsrfTokenToEventCtx: true,
-      methodsToProtect: ['PUT'],
-    }
+  csurf: {
+    https: false,
+    addCsrfTokenToEventCtx: true,
+    methodsToProtect: ["PUT"],
   },
 
   typescript: {
-    types: ['@nuxt/types']
-  }
+    types: ["@nuxt/types"],
+  },
 };
 
 export default config;
