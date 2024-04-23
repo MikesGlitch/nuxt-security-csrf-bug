@@ -7,8 +7,7 @@ const config: NuxtConfig = {
 
   csurf: {
     https: false,
-    addCsrfTokenToEventCtx: true,
-    methodsToProtect: ["PUT"],
+    methodsToProtect: ['PUT'],
   },
 
   typescript: {

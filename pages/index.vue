@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>In nuxt config I've set methodsToProtect: [], so I'm expecting both of these to pass - they should be unprotected.  Instead, they both require the CSRF</p>
     <button @click.prevent="submitApplicationForm(false)">
       Failing Submit
     </button>
